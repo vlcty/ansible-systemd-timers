@@ -15,6 +15,7 @@
           group: root
           mode: 0750
       with_dict: "{{ timers }}"
+      notify: Reload systemd
 
     - name: Uploading timer file
       template:
@@ -24,6 +25,7 @@
           group: root
           mode: 0750
       with_dict: "{{ timers }}"
+      notify: Reload systemd
 
     - name: Enabling timers
       systemd:
