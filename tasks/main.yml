@@ -13,8 +13,9 @@
           dest: "/etc/systemd/system/{{ item.key }}.service"
           owner: root
           group: root
-          mode: 0750
+          mode: 0640
       with_dict: "{{ timers }}"
+      notify: Reload systemd
 
     - name: Uploading timer file
       template:
@@ -22,8 +23,9 @@
           dest: "/etc/systemd/system/{{ item.key }}.timer"
           owner: root
           group: root
-          mode: 0750
+          mode: 0640
       with_dict: "{{ timers }}"
+      notify: Reload systemd
 
     - name: Enabling timers
       systemd:
