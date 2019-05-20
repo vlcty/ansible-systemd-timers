@@ -53,3 +53,16 @@ The timer unit will be triggered 20 seconds after systemd was started and then e
 More about timers: https://www.freedesktop.org/software/systemd/man/systemd.timer.html
 
 More about timespans: https://www.freedesktop.org/software/systemd/man/systemd.time.html
+
+## Working with shell redirection
+
+Shell redirection does not work out of the box. You have to work around that by calling `sh` or `bash`.   
+This won't work: `echo hello > /var/log/hello.log`
+This will work: `/usr/bin/bash -c \"echo hello > /var/log/hello.log\"`
+
+Tip: Always use full paths. To see where `sh` or `bash` is stored on your system you have to use `which`:
+
+```
+[root@pizza ~]# which bash
+/usr/bin/bash
+```
