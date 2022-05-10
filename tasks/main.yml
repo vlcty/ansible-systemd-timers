@@ -10,9 +10,9 @@
     - name: Uploading service file
       template:
           src: service.j2
-          dest: "/etc/systemd/system/{{ item.key }}.service"
-          owner: root
-          group: root
+          dest: "{{ systemd_base_path | default('/etc/systemd/system') }}/{{ item.key }}.service"
+          owner: "{{ item.value.timer_user | default('root') }}"
+          group: "{{ item.value.timer_user | default('root') }}"
           mode: 0640
       with_dict: "{{ timers }}"
       notify: Reload systemd
@@ -20,9 +20,9 @@
     - name: Uploading timer file
       template:
           src: timer.j2
-          dest: "/etc/systemd/system/{{ item.key }}.timer"
-          owner: root
-          group: root
+          dest: "{{ systemd_base_path | default('/etc/systemd/system') }}/{{ item.key }}.timer"
+          owner: "{{ item.value.timer_user | default('root') }}"
+          group: "{{ item.value.timer_user | default('root') }}"
           mode: 0640
       with_dict: "{{ timers }}"
       notify: Reload systemd
@@ -34,6 +34,7 @@
           enabled: true
           masked: false
           daemon_reload: true
+          scope: "{{ systemd_scope | default('system') }}"
       with_dict: "{{ timers }}"
 
   when: timers is defined
