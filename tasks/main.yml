@@ -30,7 +30,7 @@
     - name: Enabling timers
       systemd:
           name: "{{ item.key }}.timer"
-          state: started
+          state: restarted
           enabled: true
           masked: false
           daemon_reload: true
