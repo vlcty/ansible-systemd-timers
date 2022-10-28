@@ -13,7 +13,7 @@
           dest: "{{ systemd_base_path | default('/etc/systemd/system') }}/{{ item.key }}.service"
           owner: "{{ item.value.timer_user | default('root') }}"
           group: "{{ item.value.timer_user | default('root') }}"
-          mode: 0640
+          mode: 0644
       with_dict: "{{ timers }}"
       notify: Reload systemd
 
@@ -23,7 +23,7 @@
           dest: "{{ systemd_base_path | default('/etc/systemd/system') }}/{{ item.key }}.timer"
           owner: "{{ item.value.timer_user | default('root') }}"
           group: "{{ item.value.timer_user | default('root') }}"
-          mode: 0640
+          mode: 0644
       with_dict: "{{ timers }}"
       notify: Reload systemd
 
