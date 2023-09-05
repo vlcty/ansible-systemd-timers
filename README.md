@@ -29,6 +29,7 @@ That's all the magic.
 |----------|----------|------------------------------|
 | timer_precommand | no | Pre-command before command |
 | timer_command |  yes | Which command or script to execute |
+| timer_envfile |  no | Add environment file |
 | timer_user | no | Under which users the timer_command is executed. Default: root |
 | timer_persistent | no | Takes a boolean argument. If true, the time when the service unit was last triggered is stored on disk. When the timer is activated, the service unit is triggered immediately if it would have been triggered at least once during the time when the timer was inactive. This is useful to catch up on missed runs of the service when the machine was off. Note that this setting only has an effect on timers configured with OnCalendar=. Defaults to false. [Source](https://www.freedesktop.org/software/systemd/man/systemd.timer.html) |
 | timer_OnActiveSec | no | Relative time after the timer unit was last activated |
