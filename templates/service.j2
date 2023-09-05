@@ -7,6 +7,9 @@ Description={{ item.key }} Service
 
 [Service]
 Type=oneshot
+{% if item.value.timer_envfile is defined %}
+EnvironmentFile={{ item.value.timer_envfile }} 
+{% endif %}
 {% if item.value.timer_precommand is defined %}
 ExecStartPre={{ item.value.timer_precommand }} 
 {% endif %}
