@@ -8,12 +8,15 @@ Description={{ item.key }} Service
 [Service]
 Type=oneshot
 {% if item.value.timer_envfile is defined %}
-EnvironmentFile={{ item.value.timer_envfile }} 
+EnvironmentFile={{ item.value.timer_envfile }}
 {% endif %}
 {% if item.value.timer_precommand is defined %}
-ExecStartPre={{ item.value.timer_precommand }} 
+ExecStartPre={{ item.value.timer_precommand }}
 {% endif %}
 ExecStart={{ item.value.timer_command }}
 {% if item.value.timer_user is defined %}
 User={{ item.value.timer_user }}
+{% endif %}
+{% if item.value.timer_workingdir is defined %}
+WorkingDirectory={{ item.value.timer_workingdir }}
 {% endif %}
