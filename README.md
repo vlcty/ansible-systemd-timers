@@ -23,7 +23,7 @@ timers:
 
 That's all the magic.
 
-### Existing variables
+### Existing variables per timer
 
 | Variable | Required |  Default value / Explanation |
 |----------|----------|------------------------------|
@@ -57,6 +57,24 @@ The timer unit will be triggered 20 seconds after systemd was started and then e
 More about timers: https://www.freedesktop.org/software/systemd/man/systemd.timer.html
 
 More about timespans: https://www.freedesktop.org/software/systemd/man/systemd.time.html
+
+### Existing variables globally, for the role
+| Variable | Required | Default value / Explanation                                                                                                                            |
+|----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| systemd_scope | no       | Create system or user units. Default: `system`.                                                                                                        |
+| systemd_base_path | no    | Where to generate the systemd unit files. Set this to e.g. `~/.config/systemd/user` when using *systemd_scope*=`user`. Default: `/etc/systemd/system`. |
+
+You can create user timers for non-root services in combination with `become_user: '{{ my_user }}'`. Example:
+```
+systemd_base_path: ~/.config/systemd/user
+systemd_scope: user
+timers:
+  timer-one:
+    timer_command: ...
+    timer_OnCalendar: ...
+    timer_user: '{{ my_user }}'
+  ...
+```
 
 ## Working with shell redirection
 
