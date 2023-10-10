@@ -14,7 +14,7 @@ EnvironmentFile={{ item.value.timer_envfile }}
 ExecStartPre={{ item.value.timer_precommand }}
 {% endif %}
 ExecStart={{ item.value.timer_command }}
-{% if item.value.timer_user is defined %}
+{% if item.value.timer_user is defined and (systemd_scope is not defined or systemd_scope != 'user') %}
 User={{ item.value.timer_user }}
 {% endif %}
 {% if item.value.timer_workingdir is defined %}
